@@ -43,25 +43,32 @@ if __name__ == '__main__':
     
     # Get real names
     cat_to_name = None
-    with open('cat_to_name.json', 'r') as f:
+    with open(category_names, 'r') as f:
         cat_to_name = json.load(f)
         
     # set up AUTOMATICALLY device to use is: gpu or cpu 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = None
     
-    if(torch.cuda.is_available()):
-            print("GPU available: YES \nRunning On: GPU \n")    
-    else:
-            print("GPU available: NO \nRunning On: CPU \n")  
-    
-#     if (gpu):
-#         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#         if(torch.cuda.is_available()):
-#             ("GPU available: YES \n Training On: GPU \n")
-#         else:
-#             print("GPU available: NO \n Training On: CPU \n")
+#     if(torch.cuda.is_available()):
+#             print("GPU available: YES \nRunning On: GPU \n")    
 #     else:
-#         device = torch.device("cpu")
+#             print("GPU available: NO \nRunning On: CPU \n")  
+    
+    if (gpu):
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    else:
+        device = torch.device("cpu")
+        
+    if(gpu and device == torch.device("cuda")):
+        print("GPU available: YES \nRunning On: GPU \n")
+    else:
+        check_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        if(check_device == torch.device("cuda")):
+            print("GPU available: YES \nRunning On: CPU \n")
+        else:
+            print("GPU available: NO \nRunning On: CPU \n")
+       
+        
     
     # Load model
     model = load_checkpoint(checkpoint)
