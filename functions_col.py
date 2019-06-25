@@ -207,22 +207,27 @@ def train_model(output_features, trainloader, valloader, trained_model, trained 
     from workspace_utils import active_session
     
     # set up device to use is: gpu or cpu
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = None
     
-    if(torch.cuda.is_available()):
-            print("GPU available: YES \nTraining On: GPU \n")    
-    else:
-            print("GPU available: NO \nTraining On: CPU \n")    
+#     if(torch.cuda.is_available()):
+#             print("GPU available: YES \nTraining On: GPU \n")    
+#     else:
+#             print("GPU available: NO \nTraining On: CPU \n")    
 
     
-#     if (gpu):
-#         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#         if(torch.cuda.is_available()):
-#             ("GPU available: YES \n Training On: GPU \n")
-#         else:
-#             print("GPU available: NO \n Training On: CPU \n")
-#     else:
-#         device = torch.device("cpu")
+    if (gpu):
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    else:
+        device = torch.device("cpu")
+        
+    if(gpu and device == torch.device("cuda")):
+        print("GPU available: YES \nRunning On: GPU \n")
+    else:
+        check_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        if(check_device == torch.device("cuda")):
+            print("GPU available: YES \nRunning On: CPU \n")
+        else:
+            print("GPU available: NO \nRunning On: CPU \n")
     
     # Set up model
     model = None
