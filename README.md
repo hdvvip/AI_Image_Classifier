@@ -2,7 +2,7 @@
 
 ## Part I: Image Classifier Project.ipnyb
 
-## Part 2 - Building the command line application
+## Part II - Building the command line application
 
 ### Specifications
 The first file, train.py, will train a new network on a dataset and save the model as a checkpoint. The second file, predict.py, uses a trained network to predict the class for an input image.
